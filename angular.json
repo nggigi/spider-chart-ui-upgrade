@@ -1,0 +1,144 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "f43a2ad4-c985-467c-82db-7b321a2b1163",
+    "schematicCollections": ["@angular-eslint/schematics"]
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ngx-spider-chart": {
+      "projectType": "library",
+      "root": "projects/ngx-spider-chart",
+      "sourceRoot": "projects/ngx-spider-chart/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-spider-chart/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-spider-chart/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-spider-chart/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/ngx-spider-chart/**/*.ts", "projects/ngx-spider-chart/**/*.html"]
+          }
+        }
+      }
+    },
+    "ngx-spider-chart-test": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/ngx-spider-chart-test",
+      "sourceRoot": "projects/ngx-spider-chart-test/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "www",
+            "index": "projects/ngx-spider-chart-test/src/index.html",
+            "main": "projects/ngx-spider-chart-test/src/main.ts",
+            "polyfills": "projects/ngx-spider-chart-test/src/polyfills.ts",
+            "tsConfig": "projects/ngx-spider-chart-test/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ngx-spider-chart-test/src/favicon.ico",
+              "projects/ngx-spider-chart-test/src/assets",
+              {
+                "glob": "**/*",
+                "input": "dist/ngx-spider-chart/src/assets",
+                "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-spider-chart/assets/nsfw",
+                "output": "/assets/nsfw"
+              }
+            ],
+            "styles": [
+              "node_modules/primeng/resources/themes/md-dark-indigo/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "projects/ngx-spider-chart-test/src/styles/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "6mb",
+                  "maximumError": "8mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kb",
+                  "maximumError": "500kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-spider-chart-test/src/environments/environment.ts",
+                  "with": "projects/ngx-spider-chart-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "ngx-spider-chart-test:build:production"
+            },
+            "development": {
+              "buildTarget": "ngx-spider-chart-test:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "ngx-spider-chart-test:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/ngx-spider-chart-test/**/*.ts", "projects/ngx-spider-chart-test/**/*.html"]
+          }
+        }
+      }
+    }
+  }
+}

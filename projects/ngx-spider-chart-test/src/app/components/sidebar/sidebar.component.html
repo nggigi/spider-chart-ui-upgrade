@@ -1,0 +1,10 @@
+<div class="item-list">
+  @for (sidebarItem of sidebarItems; track sidebarItem) {
+    <div class="item-list__header">{{ sidebarItem.title }}</div>
+    @for (item of sidebarItem.items; track item) {
+      <div class="item-list__item" [ngClass]="{ 'item-list__item-active': activeUrl === item.route }" (click)="onNavigate(item.route)">
+        {{ item.text }}
+      </div>
+    }
+  }
+</div>

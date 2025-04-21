@@ -1,0 +1,23 @@
+<ion-app class="app-container" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.035)'" [matRippleUnbounded]="true" [matRippleRadius]="13">
+  @if (visibleSidebar) {
+    <div class="app-container__header">
+      <div class="app-container__logo" (click)="setSidebarVisibility(false)">
+        <img class="" src="assets/logo-2.png" />
+      </div>
+      <div class="app-container__text" (click)="shake()">Ngx Spider Chart</div>
+    </div>
+  } @else {
+    <div class="app-container__logo" (click)="setSidebarVisibility(true)">
+      <img class="" src="assets/logo-2.png" />
+    </div>
+    <div class="app-container__text title-without-sidebar">Ngx Spider Chart</div>
+  }
+
+  <div class="app-container__main-area" [ngClass]="{ 'app-container__sidebar-visible': visibleSidebar, 'app-container__sidebar-invisible': !visibleSidebar }" #screenshotContainer>
+    @if (visibleSidebar) {
+      <app-sidebar></app-sidebar>
+    }
+    <router-outlet></router-outlet>
+  </div>
+  <ng-container #dynamicModal></ng-container>
+</ion-app>

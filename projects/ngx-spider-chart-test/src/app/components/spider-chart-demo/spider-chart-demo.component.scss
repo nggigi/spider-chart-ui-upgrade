@@ -1,0 +1,129 @@
+@import '../../../styles/colors';
+
+.intro {
+  font-size: clamp(20px, 4vw, 24px);
+  margin-bottom: 10px;
+}
+
+.info {
+  margin-bottom: 20px;
+  font-size: clamp(14px, 3vw, 16px);
+}
+
+.wrapper {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  min-height: 600px;
+  flex-direction: row;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .chart,
+  .controller {
+    width: 100%;
+  }
+}
+
+.chart {
+  flex: 1;
+  min-width: 0;
+  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.controller {
+  flex: 1;
+  min-width: 0;
+  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+.container {
+  width: 100%;
+}
+
+.form {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.form-container {
+  width: 100%;
+}
+
+.error-message {
+  color: var(--cyrano-pink-shade-1);
+  font-size: 14px;
+  margin-top: 8px;
+  padding-bottom: 20px;
+}
+
+.datasets-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dataset-div {
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.keys-values-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+  width: 100%;
+}
+
+.key-value-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  label {
+    font-weight: 500;
+    color: #fff;
+  }
+}
+
+.input-control {
+  margin-bottom: 10px;
+}
+
+.button-group {
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  lib-primary-btn {
+    width: 45%;
+  }
+  lib-secondary-btn {
+    width: 45%;
+  }
+}
+
+.disable {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,568 @@
+// Custom Theming for Angular Material
+@use '@angular/material' as mat;
+@import '~swiper/swiper-bundle.css';
+// For more information: https://material.angular.io/guide/theming
+// @import '@angular/material/theming';
+// Plus imports for other components in your app.
+
+@import 'swiper/css';
+@import 'swiper/css/bundle';
+@import 'swiper/css/effect-coverflow';
+
+$custom-typography: mat.define-typography-config(
+  $font-family: 'Gilroy-Regular, serif',
+);
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+// @include mat.core($custom-typography);
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$ns-add-in-primary: mat.define-palette(mat.$indigo-palette);
+$ns-add-in-accent: mat.define-palette(mat.$pink-palette);
+
+// The warn palette is optional (defaults to red).
+$ns-add-in-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$ns-add-in-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $ns-add-in-primary,
+      accent: $ns-add-in-accent,
+      warn: $ns-add-in-warn,
+    ),
+    typography: $custom-typography,
+    density: -12,
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($ns-add-in-theme);
+
+@font-face {
+  font-family: 'Gilroy-Medium';
+  src: url('../assets/fonts/gilroy/Gilroy-Medium_0.ttf');
+}
+
+@font-face {
+  font-family: 'Gilroy-SemiBold';
+  src: url('../assets/fonts/gilroy/Gilroy-SemiBold_0.ttf');
+}
+
+@font-face {
+  font-family: 'Gilroy-Regular';
+  src: url('../assets/fonts/gilroy/Gilroy-Regular_0.ttf');
+}
+
+@font-face {
+  font-family: 'Gilroy-Bold';
+  src: url('../assets/fonts/gilroy/Gilroy-Bold_0.ttf');
+}
+
+@font-face {
+  font-family: 'Gilroy-Thin';
+  src: url('../assets/fonts/gilroy/Gilroy-Thin_0.ttf');
+}
+
+@import 'node_modules/nextsapien-component-lib/src/lib/shared-styles/styles.scss';
+
+@import '../../../ngx-spider-chart/src/lib/shared-styles/styles.scss';
+
+// Importing Highlight.js CSS theme for syntax highlighting
+// This theme, 'monokai-sublime', is used to apply syntax highlighting styles to various code snippets,
+// including HTML, TypeScript, JavaScript, and other languages. These styles will ensure that
+// code blocks are visually distinctive and easy to read in code demonstrations.
+@import '~highlight.js/styles/monokai-sublime.min.css';
+
+// Showcase css variables
+:root {
+  --app-sidebar-width: 200px;
+  font-size: 12px;
+}
+
+html {
+  display: flex;
+  flex: 1 1 auto;
+  height: 100vh;
+  overflow: hidden;
+  font-size: 12px;
+}
+
+body {
+  display: flex;
+  flex: 1 1 auto;
+  width: 100vw;
+  margin: 0;
+}
+
+input {
+  font-family: 'Gilroy-Regular', serif;
+}
+
+.primary-text,
+button {
+  font-family: 'Calistoga', cursive;
+}
+
+a {
+  color: $ns-grey-900;
+
+  &.link {
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: $cyrano-primary;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+table {
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 15px;
+  &.nested-table {
+    width: 95%;
+
+    tr td:first-child {
+      font-weight: bold;
+      width: 250px;
+    }
+  }
+}
+
+table,
+th,
+td {
+  border: 1px solid $ns-neutral-6;
+  border-collapse: collapse;
+  color: $ns-neutral-8;
+}
+
+th,
+td {
+  padding: 5px;
+  max-width: 25%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+h1,
+h2,
+p {
+  color: $ns-neutral-8;
+}
+
+.intro {
+  display: flex;
+  flex: 0 0 auto;
+  font-size: 22px;
+  text-align: center;
+  color: $ns-neutral-8;
+  max-width: 75%;
+  padding: 20px;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  flex: 0 0 auto;
+  font-size: 15px;
+  text-align: center;
+  color: $ns-neutral-6;
+  width: 75%;
+  justify-content: center;
+  padding: 10px;
+}
+
+.info {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  font-size: 14px;
+  color: $ns-neutral-5;
+  padding: 10px;
+  line-height: 20px;
+  max-width: 75%;
+}
+
+.detail-section {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 10px;
+
+  .mat-expansion-panel {
+    background: transparent !important;
+    border: none !important;
+  }
+}
+
+.code-section {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 15px;
+  max-width: 60%;
+}
+
+.component-demo {
+  background-color: transparent;
+  margin: 20px 20px 40px 20px;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.detail {
+  display: flex;
+  flex: 1 1 100%;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  overflow: auto;
+  height: 100%;
+}
+
+.app-container__sidebar-visible {
+  .detail {
+    width: calc(100vw - 208px);
+  }
+}
+
+.app-container__sidebar-invisible {
+  .detail-section {
+    max-width: 100vw;
+    overflow-x: scroll;
+    .component-demo {
+      margin: 0px 0px 0px 0px;
+    }
+    .code-section {
+      max-width: 90%;
+      overflow-x: scroll;
+    }
+  }
+}
+
+.showcase-container {
+  width: 100%;
+  padding: 25px 25px 25px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: calc(100% - 55px);
+  &.full-screen {
+    height: 100%;
+  }
+}
+
+.centered-scrollable {
+  align-items: center;
+  overflow-y: auto;
+  h2 {
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: left;
+    color: #fe638e;
+    text-transform: capitalize;
+  }
+}
+
+.tag-name {
+  background: #f5f5f5;
+  padding: 2px 10px;
+  border-radius: 10px;
+  border: 1px solid #ffd7d7;
+}
+
+.first-td {
+  min-width: 130px;
+}
+
+.last-td {
+  padding: 15px;
+  background: #27242c;
+  &.demo-container {
+    min-width: 250px;
+  }
+}
+
+app-otp-input-test {
+  form > lib-otp-input {
+    input {
+      width: 4rem !important;
+      text-align: center;
+    }
+  }
+}
+
+/*****************************************************
+	Custom styling example bellow.
+*****************************************************/
+
+.iti {
+  display: block !important;
+}
+
+.iti .dropdown-menu.country-dropdown {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-color: #c7cace;
+  margin-top: -1px;
+}
+
+.iti .iti__country-list {
+  box-shadow: none;
+  font-size: 14px;
+  margin-left: 0;
+  width: 244px;
+  max-height: 170px;
+}
+
+.iti__flag-container.open + input {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.iti .search-container input {
+  font-size: 14px;
+  border-color: #c7cace;
+  border-radius: 0;
+  padding: 5px 10px;
+}
+
+.iti .search-container input:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 479px) {
+  .iti .iti__country-list {
+    width: 88.3vw;
+  }
+}
+
+tel-input input {
+  height: 44px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c7cace;
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+tel-input.ng-invalid.ng-touched input {
+  border: 1px solid #c0392b;
+}
+
+tel-input input:hover {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.24);
+}
+
+tel-input input:focus {
+  outline: none !important;
+  border-color: #3498db;
+  box-shadow: 0 0 0 0 #000;
+}
+
+tel-input input::-webkit-input-placeholder {
+  color: #bac2c7;
+}
+
+tel-input input:-ms-input-placeholder {
+  color: #bac2c7;
+}
+
+tel-input input::-ms-input-placeholder {
+  color: #bac2c7;
+}
+
+tel-input input::placeholder {
+  color: #bac2c7;
+}
+
+tel-input input[disabled] {
+  background-color: #e5eaf1;
+}
+
+//------- customized primeNG calendar date picker
+lib-input-date-field {
+  font-family: 'Gilroy-Regular', serif;
+  .p-inputtext {
+    padding: 7px 0;
+    font-family: 'Gilroy-Regular', serif;
+  }
+  .p-calendar,
+  .p-calendar .p-inputtext,
+  .p-calendar .p-datepicker {
+    width: 100% !important;
+    min-width: 100% !important;
+    background: transparent;
+    border: none;
+    color: #fff;
+  }
+  .p-datepicker.lib-date-picker-panel,
+  .p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
+    background: linear-gradient(191.18deg, #27242c 61.33%, #0c0b0e 101.43%) !important;
+    border: none !important;
+    z-index: 9;
+  }
+  .p-datepicker table td,
+  .p-datepicker table th {
+    border: 1px solid #333333 !important;
+    color: #f5f5f5 !important;
+  }
+  .p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
+    color: #fff !important;
+  }
+  .p-inputtext:enabled:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    ~ .input-label {
+      top: var(--label-float-position-top);
+      font-size: var(--label-font-size-floated);
+    }
+  }
+  .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover,
+  .p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover,
+  .p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover {
+    color: #222;
+  }
+
+  .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+  .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+    color: #fff;
+  }
+
+  .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover,
+  .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover {
+    color: red;
+  }
+
+  .p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus,
+  .p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus,
+  .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.2rem red;
+  }
+
+  .p-datepicker table td.p-datepicker-today > span {
+    background: transparent;
+    color: red;
+  }
+}
+
+.mat-autocomplete-panel {
+  font-family: var(--input-number-filed-font);
+  background: var(--button-background);
+  color: var(--input-font-color) !important;
+  .mat-mdc-option {
+    color: var(--input-font-color) !important;
+    line-height: 35px;
+    height: 35px;
+  }
+}
+.mat-autocomplete-panel .mat-option.mat-selected:not(.mat-active):not(:hover) {
+  background: var(--cyrano-pink-shade-1);
+  color: var(--input-font-color) !important;
+}
+
+lib-image-upload-modal {
+  width: 100%;
+}
+
+// customized image-upload-modal
+// A css class named "image-upload-modal" has been added to ion-modal through the popup modal service
+
+.image-upload-modal {
+  --border-radius: 56px;
+  --popup-background: #27242c;
+  //--popup-border-radius: 56px;
+  --popover-container-padding: 28px;
+  --max-width: 700px;
+  --popover-container-width: 90%;
+}
+
+img[src$='#custom_pin_maps'] {
+  border: 5px solid var(--cyrano-pink-shade-1) !important;
+  border-radius: 50% 50% 50% 0 !important;
+  -webkit-border-radius: 50% 50% 50% 0px !important;
+  transform: rotate(-45deg) !important;
+  -webkit-transform: rotate(-45deg) !important;
+  height: 50px !important;
+  width: 50px !important;
+  margin-left: 9px !important;
+  margin-top: 8px !important;
+  box-shadow: inset 0px 0px 0px 2px var(--cyrano-pink-shade-3);
+}
+
+/*-----------------
+scrollbar styling
+------------------*/
+// moz
+@-moz-document url-prefix() {
+  * {
+    scrollbar-width: thin;
+    scrollbar-base-color: rgba(0, 0, 0, 0.5);
+    scrollbar-color: var(--cyrano-pink-shade-1, #fe3c72) transparent;
+  }
+}
+
+// webkit
+::-webkit-scrollbar {
+  width: 8px;
+  opacity: 0.5;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cyrano-dark-color, #28252d);
+  opacity: 0.5;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: var(--cyrano-pink-shade-1, #fe3c72);
+  opacity: 0.5;
+  border: 3px solid #000;
+}
+
+.one-line-textarea textarea {
+  overflow: hidden;
+}
+
+// Customizing the table CSS properties for Highlight.js code styling
+// This overrides the default table styles specifically for the line numbers
+// without affecting other table elements globally.
+pre {
+  code {
+    table.hljs-ln {
+      td {
+        border: unset !important; // Remove default borders for table cells
+        border-bottom: 1px solid rgba(100, 100, 100, 0.1) !important; // Add subtle bottom border for row separation
+      }
+      border: unset !important; // Remove default border for the table itself
+    }
+  }
+}
+
+.form-field__incrementer-container input {
+  padding-left: 14%;
+}

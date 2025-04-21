@@ -1,0 +1,25 @@
+<div id="tooltip">
+  <lib-alert-popup [title]="titleAlertPopup" [description]="descriptionAlertPopup"></lib-alert-popup>
+</div>
+
+<!-- [timeState]="timeStateAlertPopup" [number]="numberAlertPopup" -->
+
+<div class="container">
+  <div class="d3-container">
+    <div class="d3-chart" #D3Chart></div>
+    @if (showChartInfo) {
+      <div class="chartInfo">
+        @if (datasets.length > 0) {
+          <div class="datachart">
+            @for (dataset of datasets; let j = $index; track dataset) {
+              <div class="legend-item">
+                <div [style.border]="'5px solid ' + polygon_colors[j].value" [style.boxShadow]="'0px 0px 12px ' + polygon_colors[j].value" class="legend-color"></div>
+                {{ dataset.title }}
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

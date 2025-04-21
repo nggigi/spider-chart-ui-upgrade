@@ -1,0 +1,53 @@
+{
+  "name": "ngx-spider-chart",
+  "version": "1.0.0",
+  "author": "ngx-spider-chart",
+  "repository": {
+    "type": "git"
+  },
+  "peerDependencies": {
+    "@angular/common": "^17.3.12",
+    "@angular/core": "^17.3.12",
+    "@angular/forms": "^17.3.12",
+    "@angular/google-maps": "^17.3.10",
+    "@angular/material": "^17.3.10",
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/motion": "^6.0.0",
+    "@ionic/angular": "^7.6.0 || ^8.4.1",
+    "@ngx-translate/core": "^15.0.0",
+    "capacitor-screenshot": "^6.0.1",
+    "d3": "^7.9.0",
+    "ngx-mask": ">14.2.0 ^17.1.8",
+    "ngx-popperjs": "^17.0.0",
+    "primeicons": "^6.0.1",
+    "primeng": "^17.18.15",
+    "swiper": "^11.1.15"
+  },
+  "ngPackage": {
+    "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../dist/ngx-spider-chart",
+    "assets": [
+      "./src/lib/shared-styles"
+    ],
+    "lib": {
+      "entryFile": "src/public-api.ts"
+    }
+  },
+  "keywords": [
+    "angular",
+    "ionic",
+    "javascript",
+    "typescript",
+    "typeahead",
+    "directive",
+    "angular-material"
+  ],
+  "license": "MIT",
+  "allowedNonPeerDependencies": {
+    "ngx-translate-testing": "^6.1.0",
+    "tslib": "^2.2.0"
+  },
+  "devDependencies": {}
+}

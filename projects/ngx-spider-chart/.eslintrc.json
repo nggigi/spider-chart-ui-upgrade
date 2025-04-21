@@ -1,0 +1,50 @@
+{
+  "extends": "../../.eslintrc.json",
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["projects/ngx-spider-chart/tsconfig.lib.json", "projects/ngx-spider-chart/tsconfig.spec.json"],
+        "createDefaultProgram": true
+      },
+      "rules": {
+        "@angular-eslint/component-class-suffix": "warn",
+        "@angular-eslint/directive-selector": [
+          "off",
+          {
+            "type": "attribute",
+            "prefix": "lib",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "off",
+          {
+            "type": "element",
+            "prefix": "lib",
+            "style": "kebab-case"
+          }
+        ],
+        "@typescript-eslint/naming-convention": ["error", { "selector": "enumMember", "format": ["PascalCase", "camelCase"] }],
+        // force usage of @typescript-eslint/no-shadow instead
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": "error",
+        // force usage of @typescript-eslint/no-unused-vars instead
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }], // allow unused args in callbacks
+        "@typescript-eslint/member-ordering": "off",
+        "linebreak-style": "off",
+        "new-cap": "off",
+        "no-console": "warn",
+        "no-debugger": "error",
+        "no-invalid-this": "off",
+        "require-jsdoc": "off",
+        "valid-jsdoc": "off"
+      }
+    },
+    {
+      "files": ["*.html"],
+      "rules": {}
+    }
+  ]
+}
