@@ -1,0 +1,76 @@
+<div class="controls-wrapper">
+  <!-- Dataset Management -->
+  <div class="control-section dataset-section">
+    <h3 class="section-title">DATASETS</h3>
+    <div class="dataset-input-form">
+      <input type="text" [formControl]="newDatasetControl" placeholder="e.g., [5, 8, 3, 9, 4, 7]" />
+      <button (click)="addDataset()">ADD</button>
+    </div>
+    <ul class="dataset-list">
+      <li *ngFor="let ds of datasets; let i = index">
+        <span>DATASET {{ i + 1 }}:</span> [{{ ds.join(', ') }}]
+      </li>
+    </ul>
+  </div>
+
+  <!-- Presets Section -->
+  <div class="control-section presets-section">
+    <h3 class="section-title">PRESETS</h3>
+    <div class="button-group">
+      <button class="preset-btn preset-btn--blue" (click)="presetClicked.emit('20/20')">20/20</button>
+      <button class="preset-btn preset-btn--green" (click)="presetClicked.emit('30/40')">30/40</button>
+      <button class="preset-btn preset-btn--purple" (click)="presetClicked.emit('5/5')">5/5</button>
+      <button class="preset-btn preset-btn--orange" (click)="presetClicked.emit('3/3')">3/3</button>
+    </div>
+  </div>
+
+  <!-- Categories Section -->
+  <div class="control-section categories-section">
+    <h3 class="section-title">CATEGORIES</h3>
+    <div class="toggle-group">
+      <div class="toggle-item">
+        <label class="toggle-label toggle-label--blue">Core Elements</label>
+        <input type="checkbox" class="toggle-switch" (change)="onToggle(coreElementsToggled, $event)" checked />
+      </div>
+      <div class="toggle-item">
+        <label class="toggle-label toggle-label--green">Labels</label>
+        <input type="checkbox" class="toggle-switch" (change)="onToggle(labelsToggled, $event)" checked />
+      </div>
+      <div class="toggle-item">
+        <label class="toggle-label toggle-label--purple">Widgets</label>
+        <input type="checkbox" class="toggle-switch" (change)="onToggle(widgetsToggled, $event)" checked />
+      </div>
+      <div class="toggle-item">
+        <label class="toggle-label toggle-label--orange">Background</label>
+        <input type="checkbox" class="toggle-switch" id="bg-toggle" (change)="onToggle(backgroundToggled, $event)" checked />
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Controls Section -->
+  <div class="control-section background-controls-section">
+    <div class="toggle-group">
+      <div class="toggle-item">
+        <label class="toggle-label">Starfield</label>
+        <input type="checkbox" class="toggle-switch" (change)="onToggle(starfieldToggled, $event)" checked />
+      </div>
+      <div class="toggle-item">
+        <label class="toggle-label">Nebula</label>
+        <input type="checkbox" class="toggle-switch" (change)="onToggle(nebulaToggled, $event)" checked />
+      </div>
+      <div class="toggle-item">
+        <label class="toggle-label">Particles</label>
+        <input type="checkbox" class="toggle-switch" (change)="onToggle(particlesToggled, $event)" checked />
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions Section -->
+  <div class="control-section quick-actions-section">
+    <h3 class="section-title">QUICK ACTIONS</h3>
+    <div class="button-group">
+      <button class="action-btn action-btn--enable" (click)="enableAllClicked.emit()">ENABLE ALL</button>
+      <button class="action-btn action-btn--disable" (click)="disableAllClicked.emit()">DISABLE ALL</button>
+    </div>
+  </div>
+</div>

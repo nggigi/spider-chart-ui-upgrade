@@ -1,0 +1,215 @@
+@import '../../styles/variables';
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: $neon-text-color;
+  font-family: 'Exo 2', sans-serif;
+}
+
+.dataset-section {
+  .dataset-input-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+
+    input {
+      flex-grow: 1;
+      background-color: rgba(22, 22, 29, 0.8);
+      border: 1px solid var(--neon-purple);
+      color: var(--neon-purple);
+      padding: 8px 12px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px var(--neon-purple-glow);
+      font-family: 'Exo 2', sans-serif;
+
+      &::placeholder {
+        color: rgba(180, 110, 255, 0.5);
+      }
+    }
+
+    button {
+      background-color: var(--neon-purple);
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+
+      &:hover {
+        box-shadow: 0 0 15px var(--neon-purple-glow);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .dataset-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid var(--neon-blue-glow);
+    border-radius: 5px;
+    padding: 10px;
+
+    li {
+      color: var(--neon-cyan);
+      margin-bottom: 8px;
+      font-size: 0.9em;
+
+      span {
+        font-weight: bold;
+        color: var(--neon-blue);
+      }
+    }
+  }
+}
+
+.controls-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.control-section {
+  padding: 10px;
+  border: 1px solid $neon-cyan;
+  border-radius: 8px;
+  background: rgba(1, 22, 39, 0.5);
+  box-shadow: 0 0 15px rgba($neon-cyan, 0.5);
+}
+
+.section-title {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-bottom: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $neon-cyan;
+  text-shadow: 0 0 5px $neon-cyan, 0 0 10px $neon-cyan;
+}
+
+.button-group, .toggle-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.preset-btn, .action-btn {
+  flex: 1 1 45%;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  background-color: transparent;
+  color: $neon-text-color;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.preset-btn--blue {
+  border-color: $neon-blue;
+  box-shadow: 0 0 8px rgba($neon-blue, 0.7);
+  &:hover { background-color: rgba($neon-blue, 0.2); }
+}
+
+.preset-btn--green {
+  border-color: $neon-green;
+  box-shadow: 0 0 8px rgba($neon-green, 0.7);
+  &:hover { background-color: rgba($neon-green, 0.2); }
+}
+
+.preset-btn--purple {
+  border-color: $neon-purple;
+  box-shadow: 0 0 8px rgba($neon-purple, 0.7);
+  &:hover { background-color: rgba($neon-purple, 0.2); }
+}
+
+.preset-btn--orange {
+  border-color: $neon-orange;
+  box-shadow: 0 0 8px rgba($neon-orange, 0.7);
+  &:hover { background-color: rgba($neon-orange, 0.2); }
+}
+
+.toggle-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.toggle-label {
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-shadow: 0 0 3px;
+}
+
+.toggle-label--blue { color: $neon-blue; }
+.toggle-label--green { color: $neon-green; }
+.toggle-label--purple { color: $neon-purple; }
+.toggle-label--orange { color: $neon-orange; }
+
+.action-btn--enable {
+  border-color: $neon-green;
+  box-shadow: 0 0 10px rgba($neon-green, 0.7);
+  &:hover { background-color: rgba($neon-green, 0.2); }
+}
+
+.action-btn--disable {
+  border-color: $neon-pink;
+  box-shadow: 0 0 10px rgba($neon-pink, 0.7);
+  &:hover { background-color: rgba($neon-pink, 0.2); }
+}
+
+/* Basic toggle switch styles */
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #333;
+  border-radius: 26px;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+  }
+
+  &:checked {
+    background: $neon-cyan;
+    &::before {
+      transform: translateX(24px);
+    }
+  }
+}
+
+.background-controls-section {
+  border-style: dashed;
+  border-color: rgba($neon-orange, 0.6);
+  padding-top: 20px;
+  margin-top: -15px;
+}

@@ -1,0 +1,134 @@
+<div class="dashboard-container">
+  <div class="stars" *ngIf="showBackground && showStarfield"></div>
+  <div class="stars2" *ngIf="showBackground && showNebula"></div>
+  <div class="stars3" *ngIf="showBackground && showParticles"></div>
+
+  <button class="panel-toggle-button" (click)="togglePanel()">☰</button>
+
+  <div class="control-panel" [class.open]="isPanelOpen">
+    <app-controls-panel
+      [datasets]="datasets"
+      (datasetAdded)="onDatasetAdded($event)"
+      (presetClicked)="onPresetClicked($event)"
+      (coreElementsToggled)="onCoreElementsToggled($event)"
+      (labelsToggled)="onLabelsToggled($event)"
+      (widgetsToggled)="onWidgetsToggled($event)"
+      (backgroundToggled)="onBackgroundToggled($event)"
+      (starfieldToggled)="onStarfieldToggled($event)"
+      (nebulaToggled)="onNebulaToggled($event)"
+      (particlesToggled)="onParticlesToggled($event)"
+      (enableAllClicked)="onEnableAllClicked()"
+      (disableAllClicked)="onDisableAllClicked()"
+    ></app-controls-panel>
+  </div>
+  <div id="stars" *ngIf="showBackground && showStarfield"></div>
+  <div id="stars2" *ngIf="showBackground && showNebula"></div>
+  <div id="stars3" *ngIf="showBackground && showParticles"></div>
+  <div class="dashboard-content">
+    <div class="widget-group-top" *ngIf="showWidgets">
+      <div class="widget widget--pink">
+        <div class="radar-widget">
+          <svg viewBox="0 0 100 100">
+            <path [attr.d]="radarChartPath" />
+          </svg>
+          <div class="label" *ngIf="showLabels">{{ radialChartLabel }}</div>
+        </div>
+      </div>
+      <div class="widget widget--orange">
+        <div class="line-chart-widget orange">
+          <svg viewBox="0 0 100 50">
+            <path [attr.d]="lineChartPath" />
+          </svg>
+          <div class="label" *ngIf="showLabels">{{ lineChartLabel }}</div>
+        </div>
+      </div>
+      <div class="widget widget--purple">
+        <div class="bar-chart-widget purple">
+          <div class="bar" *ngFor="let h of barChartData" [style.height]="h + '%'"></div>
+        </div>
+      </div>
+    </div>
+    <div class="widget-group-middle" *ngIf="showWidgets">
+      <div class="widget-group-left">
+        <div class="widget widget--blue">
+          <div class="creative-widget">
+            <div class="creative-label" *ngIf="showLabels">SYSTEM STATUS</div>
+            <div class="creative-value small-text">
+              <span *ngIf="datasets.length > 0">{{ systemStatus.sets }} SETS / {{ systemStatus.length }} LEN</span>
+              <span *ngIf="datasets.length === 0">N/A</span>
+            </div>
+          </div>
+        </div>
+        <div class="widget widget--pink">
+          <div class="creative-widget">
+            <div class="creative-label" *ngIf="showLabels">ANOMALY</div>
+            <div class="creative-value">{{ anomalyData }}</div>
+          </div>
+        </div>
+        <div class="widget widget--green">
+          <div class="creative-widget">
+            <div class="creative-label" *ngIf="showLabels">MEDIAN</div>
+            <div class="creative-value">{{ dataMedian }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="central-hud" *ngIf="showCoreElements">
+        <div class="grid-container">
+          <!-- Concentric Circles -->
+          <div *ngFor="let circle of concentricCircles; let i = index" class="circle" [style.width]="(i + 1) * 20 + '%'" [style.height]="(i + 1) * 20 + '%'"></div>
+          <!-- Radial Lines -->
+          <div class="line" *ngFor="let line of radialLines; let i = index" [style.transform]="'rotate(' + i * 30 + 'deg)'"></div>
+          <!-- Dynamic Data Points -->
+          <div class="hud-data-point" *ngFor="let point of hudDataPoints" [ngStyle]="{ top: point.y + '%', left: point.x + '%' }"></div>
+        </div>
+        <div class="hud-center-piece">
+          <div class="center-icon"></div>
+        </div>
+      </div>
+      <div class="widget-group-right">
+        <div class="widget widget--blue">
+          <div class="area-chart-widget">
+            <svg viewBox="0 0 100 50">
+              <path [attr.d]="areaChartPath" />
+            </svg>
+          </div>
+        </div>
+        <div class="widget widget--orange">
+          <div class="radial-chart-widget orange">
+            <span *ngIf="showLabels">{{ radialChartLabel }}</span>
+          </div>
+        </div>
+        <div class="widget widget--green">
+          <div class="progress-bars-widget">
+            <div class="progress-item" *ngFor="let item of progressData">
+              <span *ngIf="showLabels">{{ item.label }}</span>
+              <div class="p-bar">
+                <div [style.width]="item.value + '%'"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="widget-group-bottom" *ngIf="showWidgets">
+      <div class="widget widget--orange">
+        <div class="stats-widget">
+          <div class="stat-item" *ngFor="let stat of statsData">
+            <span *ngIf="showLabels">{{ stat.label }}</span>
+            <span>{{ stat.value }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="widget widget--purple">
+        <div class="bar-chart-widget purple">
+          <div class="bar" *ngFor="let h of barChartData.slice().reverse()" [style.height]="h + '%'"></div>
+        </div>
+      </div>
+      <div class="widget widget--green">
+        <div class="scatter-plot-widget green">
+          <div class="scatter-point" *ngFor="let p of scatterPlotPoints" [style.top]="p.y + '%'" [style.left]="p.x + '%'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

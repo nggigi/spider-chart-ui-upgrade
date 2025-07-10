@@ -14,12 +14,12 @@ import { ButtonsModule, InputFieldModule } from 'nextsapien-component-lib';
 import { SpiderChartComponent } from 'ngx-spider-chart';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { SpiderChartDemoComponent } from './components/spider-chart-demo/spider-chart-demo.component';
+
 import { HighlightCodeModule } from './highlight.code.module';
 import { appRoutes } from './routes/routes';
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, SpiderChartDemoComponent],
+  declarations: [AppComponent, SidebarComponent],
   bootstrap: [AppComponent],
   imports: [
     CommonModule,

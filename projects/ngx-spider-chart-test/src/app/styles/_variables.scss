@@ -1,0 +1,22 @@
+// Neon Colors
+$neon-cyan: #00ffff;
+$neon-blue: #00d8ff;
+$neon-green: #00ff7f;
+$neon-purple: #9d00ff;
+$neon-orange: #ff9900;
+$neon-pink: #ff00ff;
+$neon-text-color: #f0f0f0;
+
+// Helper function to generate multiple box-shadows for starry background
+@function multiple-box-shadow($n) {
+  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  @for $i from 2 through $n {
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
+  }
+  @return unquote($value);
+}
+
+// Starry background shadows
+$shadows-small: multiple-box-shadow(700);
+$shadows-medium: multiple-box-shadow(200);
+$shadows-big: multiple-box-shadow(100);
