@@ -9,3 +9,4 @@ export * from './lib/interfaces/polygon-color.interface';
 export * from './lib/interfaces/spider-chart-attribute.interface';
 export * from './lib/lookup/default-spider-config';
 export * from './lib/lookup/demo-polygon-colors.lookup';
+export * from './lib/pipes/initials/initials.pipe';
