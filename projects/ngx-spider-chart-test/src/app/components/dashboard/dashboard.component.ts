@@ -408,7 +408,7 @@ export class DashboardComponent {
         return [singleNum];
       }
     } catch (error) {
-
+      console.warn('Error parsing dataset input:', error);
     }
 
     // If all methods fail, show helpful error message
