@@ -15,6 +15,7 @@ import { SpiderChartComponent } from 'ngx-spider-chart';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
+
 import { HighlightCodeModule } from './highlight.code.module';
 import { appRoutes } from './routes/routes';
 

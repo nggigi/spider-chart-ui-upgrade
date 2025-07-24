@@ -1,0 +1,107 @@
+<div class="spider-chart-demo">
+  <div class="demo-header">
+    <h1>Spider Chart Component Demo</h1>
+    <p>Interactive demonstration of the NGX Spider Chart library with HUD-style visualizations</p>
+  </div>
+
+  <div class="demo-content">
+    <!-- Chart Display Section -->
+    <div class="chart-section">
+      <div class="chart-container">
+        <lib-spider-chart [datasets]="datasets" [config]="config" [polygon_colors]="polygon_colors" [showChartInfo]="showChartInfo"> </lib-spider-chart>
+      </div>
+
+      <!-- Chart Controls -->
+      <div class="chart-controls">
+        <div class="control-group">
+          <h3>Chart Controls</h3>
+          <button class="btn" (click)="toggleFullScreen()">
+            {{ config.fullScreen ? 'Exit Fullscreen' : 'Fullscreen Mode' }}
+          </button>
+          <button class="btn" (click)="toggleChartInfo()">
+            {{ showChartInfo ? 'Hide Info' : 'Show Info' }}
+          </button>
+          <button class="btn" (click)="resetToDefault()">Reset to Default</button>
+        </div>
+
+        <div class="control-group">
+          <h3>Preset Data</h3>
+          <button class="btn preset-btn" (click)="loadPreset('heroes')">Heroes</button>
+          <button class="btn preset-btn" (click)="loadPreset('single')">Single Character</button>
+          <button class="btn preset-btn" (click)="loadPreset('team')">Team Composition</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Management Section -->
+    <div class="data-section">
+      <div class="datasets-panel">
+        <h3>Current Datasets</h3>
+        <div class="dataset-list">
+          @for (dataset of datasets; track dataset.label; let i = $index) {
+            <div class="dataset-item">
+              <div class="dataset-header">
+                <span class="dataset-label">{{ dataset.label }}</span>
+                <button class="btn-small remove-btn" (click)="removeDataset(i)">Remove</button>
+              </div>
+              <div class="dataset-values">
+                @for (key of dataset.keys; track key) {
+                  <span class="value-item">{{ key }}: {{ dataset.values[key] }}</span>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Add New Dataset -->
+      <div class="add-dataset-panel">
+        <h3>Add New Dataset</h3>
+        <div class="input-group">
+          <textarea
+            [formControl]="newDatasetControl"
+            placeholder='Enter dataset JSON, e.g.:
+{
+  "label": "New Character",
+  "keys": ["power", "speed", "agility", "intelligence", "strength", "defense"],
+  "values": {"power": 7, "speed": 8, "agility": 6, "intelligence": 9, "strength": 5, "defense": 7},
+  "polygon_color": {"value": "#FF9500", "label": "#newGradient"}
+}'
+            rows="8"
+          >
+          </textarea>
+          <button class="btn" (click)="addDataset()">Add Dataset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Examples Section -->
+    <div class="code-section">
+      <div class="code-example">
+        <h3>HTML Template</h3>
+        <pre><code [highlight]="htmlExample" language="html"></code></pre>
+      </div>
+
+      <div class="code-example">
+        <h3>TypeScript Component</h3>
+        <pre><code [highlight]="tsExample" language="typescript"></code></pre>
+      </div>
+    </div>
+
+    <!-- Configuration Details -->
+    <div class="config-section">
+      <h3>Current Configuration</h3>
+      <div class="config-display">
+        <pre><code [highlight]="config | json" language="json"></code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tooltip placeholder for chart interactions -->
+  <div id="tooltip" class="chart-tooltip" style="display: none">
+    <div class="tooltip-content">
+      <h4>{{ config.attributes?.[0]?.titleAlertPopup || 'Attribute Info' }}</h4>
+      <p>{{ config.attributes?.[0]?.descriptionAlertPopup || 'Detailed information about this attribute.' }}</p>
+    </div>
+  </div>
+</div>

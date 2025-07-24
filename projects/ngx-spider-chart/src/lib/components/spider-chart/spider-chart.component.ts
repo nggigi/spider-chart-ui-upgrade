@@ -109,7 +109,7 @@ export class SpiderChartComponent implements OnChanges, OnDestroy, AfterViewInit
     rScale: d3.ScaleLinear<number, number>,
   ): void {
     group.selectAll('line').remove();
-    return group
+    group
       .selectAll('line')
       .data(data)
       .enter()
@@ -132,7 +132,6 @@ export class SpiderChartComponent implements OnChanges, OnDestroy, AfterViewInit
         g.attr(key, datum[key]);
       });
     });
-    return group;
   }
 
   private createText(
@@ -155,7 +154,7 @@ export class SpiderChartComponent implements OnChanges, OnDestroy, AfterViewInit
       .data(data)
       .enter()
       .append('text')
-      .text((d) => this.initialsPipe.transform(d.text))
+      .text((d) => d.text)
       .attr('x', (_d, i) => {
         const x2 = rScale(MaxValue * 1.2) * Math.cos(angleSlice * i + 0.1 - Math.PI / 2);
         return x2;

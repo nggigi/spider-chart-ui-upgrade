@@ -3,8 +3,11 @@
   <div class="control-section dataset-section">
     <h3 class="section-title">DATASETS</h3>
     <div class="dataset-input-form">
-      <input type="text" [formControl]="newDatasetControl" placeholder="e.g., [5, 8, 3, 9, 4, 7]" />
+      <input type="text" [formControl]="newDatasetControl" placeholder="e.g., 1, 3, 4, 6, 7, 8" />
       <button (click)="addDataset()">ADD</button>
+    </div>
+    <div class="input-help">
+      <small>Supported formats: "1, 3, 4, 6, 7" or "1 3 4 6 7" or "13467"</small>
     </div>
     <ul class="dataset-list">
       <li *ngFor="let ds of datasets; let i = index">

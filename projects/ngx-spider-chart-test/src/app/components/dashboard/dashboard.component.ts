@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { SpiderChartComponent, ISpiderChartConfig, IDataset, ISpiderChartAttribute, IPolygonColor, defaultSpiderConfig, demoPolygonColors } from 'ngx-spider-chart';
 import { ControlsPanelComponent } from '../controls-panel/controls-panel.component';
 
 export interface DataPoint {
@@ -12,7 +13,7 @@ export interface DataPoint {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ControlsPanelComponent],
+  imports: [CommonModule, ReactiveFormsModule, ControlsPanelComponent, SpiderChartComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
@@ -70,8 +71,24 @@ export class DashboardComponent {
   showNebula = true;
   showParticles = true;
 
+  // Spider Chart Data
+  spiderDatasets: IDataset[] = [];
+  spiderConfig: ISpiderChartConfig = defaultSpiderConfig;
+  spiderPolygonColors: IPolygonColor[] = demoPolygonColors;
+  spiderAttributes: ISpiderChartAttribute[] = [
+    { key: 'option1', text: 'OPTION 1', titleAlertPopup: 'Option 1', descriptionAlertPopup: 'First attribute measurement' },
+    { key: 'option2', text: 'OPTION 2', titleAlertPopup: 'Option 2', descriptionAlertPopup: 'Second attribute measurement' },
+    { key: 'option3', text: 'OPTION 3', titleAlertPopup: 'Option 3', descriptionAlertPopup: 'Third attribute measurement' },
+    { key: 'option4', text: 'OPTION 4', titleAlertPopup: 'Option 4', descriptionAlertPopup: 'Fourth attribute measurement' },
+    { key: 'option5', text: 'OPTION 5', titleAlertPopup: 'Option 5', descriptionAlertPopup: 'Fifth attribute measurement' },
+    { key: 'option6', text: 'OPTION 6', titleAlertPopup: 'Option 6', descriptionAlertPopup: 'Sixth attribute measurement' },
+    { key: 'option7', text: 'OPTION 7', titleAlertPopup: 'Option 7', descriptionAlertPopup: 'Seventh attribute measurement' },
+    { key: 'option8', text: 'OPTION 8', titleAlertPopup: 'Option 8', descriptionAlertPopup: 'Eighth attribute measurement' },
+  ];
+
   constructor() {
     // Initialize with empty states
+    this.initializeSpiderChart();
     this.updateDynamicWidgets();
   }
 
@@ -94,6 +111,7 @@ export class DashboardComponent {
     this.updateScatterPlot();
     this.updateRadarAndReticle();
     this.updateCreativeWidgets();
+    this.updateSpiderChart(); // Add spider chart update
   }
 
   togglePanel() {
@@ -103,16 +121,15 @@ export class DashboardComponent {
   // --- CONTROL PANEL EVENT HANDLERS ---
 
   onDatasetAdded(newDatasetStr: string) {
+    // The controls panel now sends pre-parsed JSON, so we just need to parse the JSON
     try {
-      const newArr = JSON.parse(newDatasetStr);
-      if (Array.isArray(newArr) && newArr.every((item) => typeof item === 'number')) {
-        this.datasets.push(newArr);
+      const parsedDataset = JSON.parse(newDatasetStr);
+      if (Array.isArray(parsedDataset) && parsedDataset.every((item) => typeof item === 'number' && !isNaN(item))) {
+        this.datasets.push(parsedDataset);
         this.updateDynamicWidgets();
-      } else {
-        alert('Invalid data format in dataset string.');
       }
-    } catch (e) {
-      alert(`Error parsing dataset string: ${e}`);
+    } catch (error) {
+      console.error('Error parsing dataset:', error);
     }
   }
 
@@ -318,5 +335,169 @@ export class DashboardComponent {
     } else {
       this.anomalyData = 'N/A';
     }
+  }
+
+  // --- DATA PARSING UTILITIES ---
+
+  /**
+   * Parses dataset input in multiple formats:
+   * - Comma-separated: "1, 3, 4, 6, 7" or "1,3,4,6,7"
+   * - Bracket format: "[1, 3, 4, 6, 7]"
+   * - Simple digits: "13467" (each digit becomes a value)
+   */
+  private parseDatasetInput(input: string): number[] | null {
+    if (!input || !input.trim()) {
+      return null;
+    }
+
+    const trimmedInput = input.trim();
+
+    try {
+      // Method 1: Try JSON format first (backward compatibility)
+      if (trimmedInput.startsWith('[') && trimmedInput.endsWith(']')) {
+        const parsed = JSON.parse(trimmedInput);
+        if (Array.isArray(parsed) && parsed.every((item) => typeof item === 'number' && !isNaN(item))) {
+          return parsed;
+        }
+      }
+
+      // Method 2: Comma-separated values (most user-friendly)
+      if (trimmedInput.includes(',')) {
+        const values = trimmedInput
+          .split(',')
+          .map((val) => {
+            const num = parseFloat(val.trim());
+            return isNaN(num) ? null : num;
+          })
+          .filter((val) => val !== null) as number[];
+
+        if (values.length > 0) {
+          return values;
+        }
+      }
+
+      // Method 3: Space-separated values
+      if (trimmedInput.includes(' ')) {
+        const values = trimmedInput
+          .split(/\s+/)
+          .map((val) => {
+            const num = parseFloat(val.trim());
+            return isNaN(num) ? null : num;
+          })
+          .filter((val) => val !== null) as number[];
+
+        if (values.length > 0) {
+          return values;
+        }
+      }
+
+      // Method 4: Single number or consecutive digits (existing logic)
+      if (/^[0-9]+$/.test(trimmedInput)) {
+        // If it's a single number > 10, treat each digit as separate value
+        if (trimmedInput.length > 1) {
+          return trimmedInput.split('').map(Number);
+        } else {
+          // Single digit, return as single value
+          return [Number(trimmedInput)];
+        }
+      }
+
+      // Method 5: Try to parse as a single number
+      const singleNum = parseFloat(trimmedInput);
+      if (!isNaN(singleNum)) {
+        return [singleNum];
+      }
+    } catch (error) {
+
+    }
+
+    // If all methods fail, show helpful error message
+    alert(`Invalid dataset format. Supported formats:
+• Comma-separated: "1, 3, 4, 6, 7"
+• Space-separated: "1 3 4 6 7"
+• Consecutive digits: "13467"
+• JSON array: "[1, 3, 4, 6, 7]"`);
+    return null;
+  }
+
+  // --- SPIDER CHART INITIALIZATION ---
+
+  private initializeSpiderChart() {
+    // Initialize with empty state - will be updated dynamically
+    this.spiderDatasets = [];
+
+    // Setup spider chart configuration
+    this.spiderConfig = {
+      w: 300,
+      h: 300,
+      maxValue: 10,
+      levels: 5,
+      fullScreen: false,
+      attributes: this.spiderAttributes,
+      datasets: this.spiderDatasets,
+    };
+  }
+
+  /**
+   * Updates the spider chart dynamically based on current datasets
+   * Handles multiple states: empty, single dataset, multiple datasets
+   */
+  private updateSpiderChart() {
+    this.spiderDatasets = [];
+
+    if (this.datasets.length === 0) {
+      // Empty state - no datasets
+      this.spiderConfig = {
+        ...this.spiderConfig,
+        datasets: [],
+      };
+      return;
+    }
+
+    // Convert each dataset array to spider chart format
+    this.datasets.forEach((dataset, index) => {
+      // Ensure we have exactly 8 values for the 8 options
+      const paddedDataset = [...dataset];
+      while (paddedDataset.length < 8) {
+        paddedDataset.push(0); // Fill missing values with 0
+      }
+
+      // Limit to first 8 values if dataset is longer
+      const limitedDataset = paddedDataset.slice(0, 8);
+
+      const spiderDataset: IDataset = {
+        title: `Dataset ${index + 1}`,
+        label: `Dataset ${index + 1}`,
+        keys: ['option1', 'option2', 'option3', 'option4', 'option5', 'option6', 'option7', 'option8'],
+        values: {
+          option1: limitedDataset[0] || 0,
+          option2: limitedDataset[1] || 0,
+          option3: limitedDataset[2] || 0,
+          option4: limitedDataset[3] || 0,
+          option5: limitedDataset[4] || 0,
+          option6: limitedDataset[5] || 0,
+          option7: limitedDataset[6] || 0,
+          option8: limitedDataset[7] || 0,
+        },
+        polygon_color: {
+          value: this.spiderPolygonColors[index % this.spiderPolygonColors.length].value,
+          label: this.spiderPolygonColors[index % this.spiderPolygonColors.length].label,
+        },
+      };
+
+      this.spiderDatasets.push(spiderDataset);
+    });
+
+    // Calculate dynamic max value based on actual data
+    const allValues = this.spiderDatasets.flatMap((dataset) => Object.values(dataset.values));
+    const maxDataValue = allValues.length > 0 ? Math.max(...allValues) : 10;
+    const dynamicMaxValue = Math.max(maxDataValue * 1.2, 10); // 20% padding above max value, minimum 10
+
+    // Update spider chart configuration
+    this.spiderConfig = {
+      ...this.spiderConfig,
+      maxValue: dynamicMaxValue,
+      datasets: this.spiderDatasets,
+    };
   }
 }

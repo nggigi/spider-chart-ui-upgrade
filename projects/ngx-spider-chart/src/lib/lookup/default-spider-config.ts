@@ -13,7 +13,7 @@ export const defaultSpiderConfig: ISpiderChartConfig = {
   dotRadius: 3,
   opacityCircles: 0.1,
   strokeWidth: 2,
-  color: d3.scaleOrdinal().range(['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']),
+  color: d3.scaleOrdinal<string, string>().range(['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']),
   attributes: [
     {
       key: 'One',

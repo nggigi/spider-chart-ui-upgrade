@@ -46,6 +46,17 @@
     }
   }
 
+  .input-help {
+    margin: 5px 0 15px 0;
+    small {
+      color: var(--neon-cyan);
+      opacity: 0.7;
+      font-style: italic;
+      font-size: 0.8em;
+      text-shadow: 0 0 3px var(--neon-cyan-glow);
+    }
+  }
+
   .dataset-list {
     list-style: none;
     padding: 0;
@@ -94,17 +105,21 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   color: $neon-cyan;
-  text-shadow: 0 0 5px $neon-cyan, 0 0 10px $neon-cyan;
+  text-shadow:
+    0 0 5px $neon-cyan,
+    0 0 10px $neon-cyan;
 }
 
-.button-group, .toggle-group {
+.button-group,
+.toggle-group {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
 }
 
-.preset-btn, .action-btn {
+.preset-btn,
+.action-btn {
   flex: 1 1 45%;
   padding: 10px;
   border: 1px solid;
@@ -123,25 +138,33 @@
 .preset-btn--blue {
   border-color: $neon-blue;
   box-shadow: 0 0 8px rgba($neon-blue, 0.7);
-  &:hover { background-color: rgba($neon-blue, 0.2); }
+  &:hover {
+    background-color: rgba($neon-blue, 0.2);
+  }
 }
 
 .preset-btn--green {
   border-color: $neon-green;
   box-shadow: 0 0 8px rgba($neon-green, 0.7);
-  &:hover { background-color: rgba($neon-green, 0.2); }
+  &:hover {
+    background-color: rgba($neon-green, 0.2);
+  }
 }
 
 .preset-btn--purple {
   border-color: $neon-purple;
   box-shadow: 0 0 8px rgba($neon-purple, 0.7);
-  &:hover { background-color: rgba($neon-purple, 0.2); }
+  &:hover {
+    background-color: rgba($neon-purple, 0.2);
+  }
 }
 
 .preset-btn--orange {
   border-color: $neon-orange;
   box-shadow: 0 0 8px rgba($neon-orange, 0.7);
-  &:hover { background-color: rgba($neon-orange, 0.2); }
+  &:hover {
+    background-color: rgba($neon-orange, 0.2);
+  }
 }
 
 .toggle-item {
@@ -158,21 +181,33 @@
   text-shadow: 0 0 3px;
 }
 
-.toggle-label--blue { color: $neon-blue; }
-.toggle-label--green { color: $neon-green; }
-.toggle-label--purple { color: $neon-purple; }
-.toggle-label--orange { color: $neon-orange; }
+.toggle-label--blue {
+  color: $neon-blue;
+}
+.toggle-label--green {
+  color: $neon-green;
+}
+.toggle-label--purple {
+  color: $neon-purple;
+}
+.toggle-label--orange {
+  color: $neon-orange;
+}
 
 .action-btn--enable {
   border-color: $neon-green;
   box-shadow: 0 0 10px rgba($neon-green, 0.7);
-  &:hover { background-color: rgba($neon-green, 0.2); }
+  &:hover {
+    background-color: rgba($neon-green, 0.2);
+  }
 }
 
 .action-btn--disable {
   border-color: $neon-pink;
   box-shadow: 0 0 10px rgba($neon-pink, 0.7);
-  &:hover { background-color: rgba($neon-pink, 0.2); }
+  &:hover {
+    background-color: rgba($neon-pink, 0.2);
+  }
 }
 
 /* Basic toggle switch styles */

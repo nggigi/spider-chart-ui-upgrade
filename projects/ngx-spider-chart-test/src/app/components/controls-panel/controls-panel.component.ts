@@ -27,13 +27,79 @@ export class ControlsPanelComponent {
 
   addDataset() {
     const value = this.newDatasetControl.value;
-    if (value && /^\s*\[\s*\d+(\s*,\s*\d+)*\s*\]\s*$/.test(value)) {
-      this.datasetAdded.emit(value);
+    const parsedDataset = this.parseDatasetInput(value);
+    if (parsedDataset) {
+      this.datasetAdded.emit(JSON.stringify(parsedDataset));
       this.newDatasetControl.reset('');
     } else {
-      // TODO: Implement user-facing error feedback for invalid dataset format
-      alert('Invalid dataset format. Please use a comma-separated array of numbers, e.g., [1, 2, 3]');
+      alert('Invalid dataset format. Supported formats: "1, 3, 4, 6, 7" or "1 3 4 6 7" or "13467"');
     }
+  }
+
+  // Reusing parsing logic from dashboard component
+  private parseDatasetInput(input: string): number[] | null {
+    if (!input || !input.trim()) {
+      return null;
+    }
+
+    const trimmedInput = input.trim();
+
+    try {
+      if (trimmedInput.startsWith('[') && trimmedInput.endsWith(']')) {
+        const parsed = JSON.parse(trimmedInput);
+        if (Array.isArray(parsed) && parsed.every((item) => typeof item === 'number' && !isNaN(item))) {
+          return parsed;
+        }
+      }
+
+      if (trimmedInput.includes(',')) {
+        const values = trimmedInput
+          .split(',')
+          .map((val) => {
+            const num = parseFloat(val.trim());
+            return isNaN(num) ? null : num;
+          })
+          .filter((val) => val !== null) as number[];
+
+        if (values.length > 0) {
+          return values;
+        }
+      }
+
+      if (trimmedInput.includes(' ')) {
+        const values = trimmedInput
+          .split(/\s+/)
+          .map((val) => {
+            const num = parseFloat(val.trim());
+            return isNaN(num) ? null : num;
+          })
+          .filter((val) => val !== null) as number[];
+
+        if (values.length > 0) {
+          return values;
+        }
+      }
+
+      if (/^[0-9]+$/.test(trimmedInput)) {
+        if (trimmedInput.length > 1) {
+          return trimmedInput.split('').map(Number);
+        } else {
+          return [Number(trimmedInput)];
+        }
+      }
+
+      const singleNum = parseFloat(trimmedInput);
+      if (!isNaN(singleNum)) {
+        return [singleNum];
+      }
+    } catch (error) {
+
+    }
+
+    alert(
+      `Invalid dataset format. Supported formats: \n• Comma-separated: "1, 3, 4, 6, 7"\n• Space-separated: "1 3 4 6 7"\n• Consecutive digits: "13467"\n• JSON array: "[1, 3, 4, 6, 7]"`,
+    );
+    return null;
   }
 
   onToggle(emitter: EventEmitter<boolean>, event: Event) {

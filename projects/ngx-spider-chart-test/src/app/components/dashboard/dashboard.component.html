@@ -72,18 +72,8 @@
           </div>
         </div>
       </div>
-      <div class="central-hud" *ngIf="showCoreElements">
-        <div class="grid-container">
-          <!-- Concentric Circles -->
-          <div *ngFor="let circle of concentricCircles; let i = index" class="circle" [style.width]="(i + 1) * 20 + '%'" [style.height]="(i + 1) * 20 + '%'"></div>
-          <!-- Radial Lines -->
-          <div class="line" *ngFor="let line of radialLines; let i = index" [style.transform]="'rotate(' + i * 30 + 'deg)'"></div>
-          <!-- Dynamic Data Points -->
-          <div class="hud-data-point" *ngFor="let point of hudDataPoints" [ngStyle]="{ top: point.y + '%', left: point.x + '%' }"></div>
-        </div>
-        <div class="hud-center-piece">
-          <div class="center-icon"></div>
-        </div>
+      <div class="central-spider-chart" *ngIf="showCoreElements">
+        <lib-spider-chart [config]="spiderConfig" [datasets]="spiderDatasets" [polygon_colors]="spiderPolygonColors"> </lib-spider-chart>
       </div>
       <div class="widget-group-right">
         <div class="widget widget--blue">
