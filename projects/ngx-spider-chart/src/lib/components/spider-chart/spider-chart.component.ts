@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, Input, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
 import { SharedModule } from 'nextsapien-component-lib';
 import { AlertStatusFields } from '../../enums/alert-status-fields.enum';
@@ -13,14 +13,13 @@ import { IPolygonColor } from '../../interfaces/polygon-color.interface';
 import { ISpiderChartAttribute } from '../../interfaces/spider-chart-attribute.interface';
 import { circleData, defsF, defsLG, defsRG } from '../../lookup/svg-config.lookup';
 import { InitialsPipe } from '../../pipes/initials/initials.pipe';
-import { PipeModule } from '../../pipes/pipe.module';
 
 @Component({
   selector: 'lib-spider-chart',
   templateUrl: './spider-chart.component.html',
   styleUrl: './spider-chart.component.scss',
   standalone: true,
-  imports: [CommonModule, SharedModule, PipeModule],
+  imports: [CommonModule, SharedModule, InitialsPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpiderChartComponent implements OnChanges, OnDestroy, AfterViewInit {
@@ -42,7 +41,7 @@ export class SpiderChartComponent implements OnChanges, OnDestroy, AfterViewInit
   public defsF: IDefsF[] = [];
   public defsLG: IDefsLG[] = [];
   public circleData: ICircleData[] = [];
-  public readonly initialsPipe: InitialsPipe = inject(InitialsPipe);
+  public readonly initialsPipe: InitialsPipe = new InitialsPipe();
 
   constructor(private cdr: ChangeDetectorRef) {}
 
