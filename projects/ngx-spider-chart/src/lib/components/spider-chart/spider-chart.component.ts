@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
-import { SharedModule } from 'nextsapien-component-lib';
 import { AlertStatusFields } from '../../enums/alert-status-fields.enum';
 import { ICircleData } from '../../interfaces/chart-data-circle.interface';
 import { IDefsF } from '../../interfaces/chart-data-defs-f.interface';
@@ -19,7 +18,7 @@ import { InitialsPipe } from '../../pipes/initials/initials.pipe';
   templateUrl: './spider-chart.component.html',
   styleUrl: './spider-chart.component.scss',
   standalone: true,
-  imports: [CommonModule, SharedModule, InitialsPipe],
+  imports: [CommonModule, InitialsPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpiderChartComponent implements OnChanges, OnDestroy, AfterViewInit {
@@ -72,6 +71,14 @@ export class SpiderChartComponent implements OnChanges, OnDestroy, AfterViewInit
 
   public onClosedAlert(data: { event: boolean; field: AlertStatusFields }): void {
     // TODO: Implement this
+  }
+
+  public closeTooltip(): void {
+    this.titleAlertPopup = '';
+    this.descriptionAlertPopup = '';
+    const toolTip = d3.select('#tooltip');
+    toolTip.style('display', 'none');
+    this.cdr.detectChanges();
   }
 
   private initializeChart(): void {

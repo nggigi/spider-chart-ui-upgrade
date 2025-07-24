@@ -6,6 +6,6 @@ import { InitialsPipe } from './initials/initials.pipe';
   declarations: [InitialsPipe],
   imports: [CommonModule],
   exports: [InitialsPipe],
-  providers: [InitialsPipe],
+  providers: [],
 })
 export class PipeModule {}

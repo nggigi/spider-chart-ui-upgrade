@@ -79,7 +79,14 @@
               "node_modules/primeicons/primeicons.css",
               "projects/ngx-spider-chart-test/src/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "html2canvas",
+              "date-fns",
+              "google-libphonenumber",
+              "inputmask",
+              "moment"
+            ]
           },
           "configurations": {
             "production": {

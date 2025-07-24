@@ -1,3 +1,57 @@
+/* Tooltip styles */
+#tooltip {
+  position: absolute;
+  display: none;
+  z-index: 1000;
+  max-width: 300px;
+}
+
+.tooltip-container {
+  font-family: 'Gilroy', sans-serif;
+}
+
+.alert-popup {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.alert-header {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.alert-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    color: #666;
+  }
+}
+
 @import '../../shared-styles/common/colors';
 .align-chart {
   display: flex;
